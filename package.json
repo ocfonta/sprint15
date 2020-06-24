@@ -1,0 +1,45 @@
+{
+  "name": "sprint15",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "dev": "nodemon app.js "
+  },
+  "keywords": [],
+  "author": "Lyubov",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "celebrate": "^12.1.1",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-winston": "^4.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.19",
+    "mongoose-beautiful-unique-validation": "^7.1.1",
+    "mongoose-custom-validators": "0.0.4",
+    "mongoose-unique-validator": "^2.0.3",
+    "mongoose-validator": "^2.1.0",
+    "validator": "^13.1.1",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-react": "^7.20.0",
+    "nodemon": "^2.0.4"
+  },
+  "description": "API 15 sprint",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ocfonta/sprint13.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ocfonta/sprint12Luba/issues"
+  },
+  "homepage": "https://github.com/ocfonta/sprint13.git"
+}
