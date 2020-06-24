@@ -1,5 +1,6 @@
 const cardsRoute = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
+const { urlValidator } = require('../middlewares/urlValidate');
 const { createCard, allCards, delCard } = require('../controllers/cards');
 
 cardsRoute.get('/', allCards);
@@ -7,7 +8,7 @@ cardsRoute.get('/', allCards);
 cardsRoute.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    link: Joi.string().required(),
+    link: Joi.string().custom(urlValidator, 'urlValidator').required(),
   }),
 }), createCard);
 

@@ -67,7 +67,7 @@ const login = (req, res, next) => {
   return User.findByEmail(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
-      res.cookie('jwt', token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { // JWT после создания должен быть отправлен клиенту
+      res.cookie('jwt', token, JWT_SECRET, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
         secure: true,

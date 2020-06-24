@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const validate = require('mongoose-validator');
+// const validate = require('mongoose-validator');
 const validatorEmail = require('validator/lib/isEmail');
 const uniqValidator = require('mongoose-unique-validator');
 
@@ -8,13 +8,6 @@ const uniqValidator = require('mongoose-unique-validator');
 const UnauthErr = require('../errors/unauthorized-err');
 const ConfErr = require('../errors/conflict-err');
 
-// валидатор
-const urlValidator = [
-  validate({
-    validator: 'isURL',
-    message: 'Неверный формат URL',
-  }),
-];
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -31,7 +24,6 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     required: true,
-    validate: urlValidator,
   },
   email: {
     type: String,
