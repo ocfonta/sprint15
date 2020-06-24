@@ -3,6 +3,7 @@
 JS, GIT, Node.js, MangooDB, express.js 
 ---
 ### Ссылка на проект <https://www.mestopraktikum.xyz> <br>
+### Публичный IP сервера: `130.193.36.153`
 #### API:</br>
  Добавлены signin и signup</br>
 `POST /users` создаёт пользователя</br>
