@@ -2,7 +2,7 @@
 ## Использованы технологии:</br>
 JS, GIT, Node.js, MangooDB, express.js 
 ---
-### Ссылка на проект <https://www.mestopraktikum.xyz/users> <br>
+### Ссылка на проект <https://www.mestopraktikum.xyz> <br>
 #### API:</br>
  Добавлены signin и signup</br>
 `POST /users` создаёт пользователя</br>
