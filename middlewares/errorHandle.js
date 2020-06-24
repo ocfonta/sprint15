@@ -1,8 +1,5 @@
-// const mongoose = require('mongoose');
-
 const errorHandle = (err, req, res, next) => {
   // если у ошибки нет статуса, выставляем 500
-
   let { statusCode = 500 } = err;
   const { message } = err;
 
@@ -20,4 +17,5 @@ const errorHandle = (err, req, res, next) => {
 
   next();
 };
+
 module.exports = { errorHandle };

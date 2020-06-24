@@ -1,4 +1,6 @@
+require('dotenv').config();
 const express = require('express');
+
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -10,7 +12,7 @@ const { login, createUser } = require('./controllers/users');
 const NotFoundError = require('./errors/not-found-err');
 
 const auth = require('./middlewares/auth');
-
+const { urlValidator } = require('./middlewares/urlValidate');
 const { errorHandle } = require('./middlewares/errorHandle');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -26,7 +28,14 @@ const { PORT = 3000 } = process.env;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 app.use(requestLogger);
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email().error(new Error('Некорректная почта')),
@@ -37,7 +46,7 @@ app.post('/signup', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     about: Joi.string().required().min(2).max(30),
-    avatar: Joi.string().required(),
+    avatar: Joi.string().custom(urlValidator, 'urlValidator').required(),
     email: Joi.string().required().email().error(new Error('Некорректная почта')),
     password: Joi.string().required().min(6).error(new Error('Пароль должен содержать не менее 6 символов')),
 

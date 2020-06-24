@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
 const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-err');
 
@@ -65,17 +66,17 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findByEmail(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'super-strong-secret', { expiresIn: '7d' });
-      res.cookie('jwt', token, 'super-strong-secret', { // JWT после создания должен быть отправлен клиенту
-        maxAge: '3600000 * 24 * 7',
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      res.cookie('jwt', token, JWT_SECRET, {
+        maxAge: 3600000 * 24 * 7,
         httpOnly: true,
         secure: true,
         sameSite: true,
       });
       res.status(200).send({ token });
     })
-    .catch(() => {
-      throw new AuthErr('Ошибка авторизации, неправильный email или пароль');
+    .catch((err) => {
+      throw new AuthErr(err.message);
     })
     .catch(next);
 };
